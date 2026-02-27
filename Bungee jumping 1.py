@@ -1,3 +1,5 @@
+#Code to numerically solve differential equation and plot graphs
+
 import numpy as np 
 import matplotlib.pyplot as plt 
 from scipy.integrate import solve_ivp
@@ -87,58 +89,7 @@ plt.xlabel('Time / s')
 plt.ylabel('Acceleration / $ms^{-2}$')
 #plt.savefig('Bungee_jumping6.pdf')
 plt.show()
-
-#Changing Spring constant, rope hangs down
-kk = [1, 5, 50]
-plt.figure()
-
-#Velocity
-for k in kk:
-    def fun2(t, z):
-        x, v = z
-        dxdt = v
-        if x > 0:
-          dvdt = g - (k/(m + rho*l/2))*x
-        else:
-            dvdt = g 
-        return [dxdt, dvdt]
-
-    t_span = (0, 100)
-    v0 = [0, np.sqrt((rho*g*(2*l*l - l**2) + 4*m*g*l)/(2*m + rho*(l-l)))]
-    sol2 = solve_ivp(fun2, t_span, v0, t_eval = np.linspace(0, 100, 150))
-
-    a2 = np.gradient(sol2.y[1], sol2.t)
-
-    plt.plot(sol2.t, sol2.y[1], label = 'k = ' + str(k))
-plt.xlabel('Time / s')
-plt.ylabel('Velocity / $ms^{-1}$')
-plt.legend()
-#plt.savefig('Bungee_jumping7.pdf')
-plt.show()
-
-plt.figure()
-
-#Acceleration
-for k in kk:
-    def fun2(t, z):
-        x, v = z
-        dxdt = v
-        if x > 0:
-          dvdt = g - (k/(m + rho*l/2))*x #- (c/m)*v**2
-        else:
-            dvdt = g #- (c/m)*v**2
-        return [dxdt, dvdt]
-
-    t_span = (0, 100)
-    v0 = [0, np.sqrt((rho*g*(2*l*l - l**2) + 4*m*g*l)/(2*m + rho*(l-l)))]
-    sol2 = solve_ivp(fun2, t_span, v0, t_eval = np.linspace(0, 100, 150))
-
-    a2 = np.gradient(sol2.y[1], sol2.t)
-
-    plt.plot(sol2.t, a2, label = 'k = ' + str(k))
-plt.xlabel('Time / s')
-plt.ylabel('Acceleration / $ms^{-2}$')
-plt.legend()
 #plt.savefig('Bungee_jumping8.pdf')
 
 plt.show()
+
