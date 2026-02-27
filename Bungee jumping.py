@@ -1,3 +1,5 @@
+#Code to plot graphs for the free fall portion of the bungee jump
+
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
@@ -64,3 +66,4 @@ plt.legend()
 plt.show()
 
 # plt.show()
+
